@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>表，栈，队列 | compass_blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://amazing-compass.github.io//favicon.ico?v=1615295276896">
+<link rel="stylesheet" href="https://amazing-compass.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="1.抽象数据类型ADT
+抽象数据类型是带有一组操作的一些对象的集合。诸如表，集合，图以及他们各自的操作一起形成的这些对象都可以被看作是抽象数据类型.
+2.表ADT
+1.数组实现
+数组大小固定，但在需要的时候可以用双倍容量创建一个不同的数组。..." />
+    <meta name="keywords" content="数据结构与算法分析（Java）" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://amazing-compass.github.io/">
+        <img src="https://amazing-compass.github.io//images/avatar.png?v=1615295276896" class="site-logo">
+        <h1 class="site-title">compass_blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/amazing-compass" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://amazing-compass.github.io//atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">表，栈，队列</h2>
+            <div class="post-date">2021-03-08</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="1抽象数据类型adt">1.抽象数据类型ADT</h2>
+<p>抽象数据类型是带有一组操作的一些对象的集合。诸如表，集合，图以及他们各自的操作一起形成的这些对象都可以被看作是抽象数据类型.</p>
+<h2 id="2表adt">2.表ADT</h2>
+<h3 id="1数组实现">1.数组实现</h3>
+<p>数组大小固定，但在需要的时候可以用双倍容量创建一个不同的数组。</p>
+<p>插入和删除的花销为O（n^2）.</p>
+<h3 id="2链表实现">2.链表实现</h3>
+<p>链表有一系列节点组成，每一个节点均含有表元素和到包含该元素后继元的节点的链。</p>
+<h2 id="3java-collections-api中的表">3.Java Collections API中的表</h2>
+<h3 id="1collection接口">1.collection接口</h3>
+<pre><code class="language-java">    public interface Collection&lt;AnyType&gt; extends Iterable&lt;AnyType&gt;{  //实现Iterator接口的那些类可以拥有增强for循环
+        int size();
+        boolean isEmpty();
+        void clear();
+        boolean contains(AnyType x);
+        boolean add(AnyType x);
+        boolean remove(AnyType x);
+        java.util.Iterator&lt;AnyType&gt; iterator();
+        
+    }
+</code></pre>
+<h3 id="2iterator接口">2.Iterator接口</h3>
+<pre><code class="language-java">public interface Iterator&lt;AnyType&gt;{
+    boolean hasNext();
+    AnyType next();
+    void remove();
+    //Iterator接口中remove（）方法相对于Collection中的remove（）方法优点
+    //Collection中的remove（）方法必须先找到被删除的项，而Iterator接口中自带一个类似于指针的东西，在iterator中循环，相当于知道索要删除的项的准确位置     //，所以删除它的开销小得多。          后面的代码会体现
+}
+</code></pre>
+<h3 id="3list接口arraylist可变长数组">3.List接口——&gt;ArrayList(可变长数组)</h3>
+<h3 id="linkedlist双链表实现">——&gt;LinkedList(双链表实现)</h3>
+<pre><code class="language-java">public interface List&lt;AnyType&gt; extends Iterable&lt;AnyType&gt;{
+        AnyType get(int idx);
+        AnyType set(int idx, AnyType newVal);
+        void add(int idx , AnyType x);
+        void remove(int idx);
+        ListIterator&lt;AnyType&gt; listIterator(int pos);
+    }
+</code></pre>
+<h3 id="4remove方法对linkedlist类的使用">4.remove（）方法对LinkedList类的使用</h3>
+<pre><code class="language-java">    public static void removeEvenVer1(List&lt;Integer&gt; lst){
+        int i=0;
+        while(i&lt;lst.size())
+            if(lst.get(i)%2==0)
+                lst.remove(i);
+            else
+                i++;
+    }
+//方法①
+//ArrayList     get效率高  但remove效率低
+//LinkedList    get效率低  且remove效率低
+
+
+
+
+
+    public static void removeEvenVer2(List&lt;Integer&gt; lst){
+        for(Integer x :lst){
+            if(x%2==0)
+                lst.remove(x);
+        }
+    }
+//方法②
+//因为当一项被删除时，由增强for循环所使用的基础迭代器是非法的。          ！！！！！！！！！为什么？？？！！！！！！！！
+
+
+    public static void removeEvenVer3(List&lt;Integer&gt; lst){
+        Iterator&lt;Integer&gt; itr =lst.iterator();
+        
+        while(itr.hasNext())
+            if(itr.next()%2==0)
+                itr.remove();
+    }
+//方法③
+//Iterator内部包含类似指针，故可以使用remove（）方法，且效率为常数。  LinkedList效率高，但ArrayList中remove仍花费二次时间
+</code></pre>
+<h3 id="5listiterator接口">5.ListIterator接口</h3>
+<pre><code class="language-java">    public interface ListIterator&lt;AnyType&gt; extends Iterator&lt;AnyType&gt;{
+        boolean hasPrevious();
+        AnyType previous();
+        
+        void add(AnyType x);
+        void set(AnyType newVal);   //改变迭代器看到的最后一个值
+    }
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://amazing-compass.github.io/tag/ze9GdT6-H/" class="tag">
+                    数据结构与算法分析（Java）
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://amazing-compass.github.io/post/hello-gridea/">
+                  <h3 class="post-title">
+                    Hello Gridea
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
