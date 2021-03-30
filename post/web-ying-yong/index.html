@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Web应用 | compass_blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://amazing-compass.github.io//favicon.ico?v=1617114000430">
+<link rel="stylesheet" href="https://amazing-compass.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="1.web应用概述（遵循HTTP协议，超文本传输协议）
+World Wide Web
+1.网页
+2.网页互相连接
+网页包含多个对象
+对象：HTML文件，JPEG图片，视频文件，动态脚本等
+基本HTML文件：包含对其他对象引用的链接
+对象的寻..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://amazing-compass.github.io/">
+        <img src="https://amazing-compass.github.io//images/avatar.png?v=1617114000430" class="site-logo">
+        <h1 class="site-title">compass_blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/amazing-compass" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      该走的路一步也不会少走！
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://amazing-compass.github.io//atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Web应用</h2>
+            <div class="post-date">2021-03-30</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="1web应用概述遵循http协议超文本传输协议">1.web应用概述（遵循HTTP协议，超文本传输协议）</h2>
+<p>World Wide Web</p>
+<p>1.网页</p>
+<p>2.网页互相连接</p>
+<p>网页包含多个对象</p>
+<p>对象：HTML文件，JPEG图片，视频文件，动态脚本等</p>
+<p>基本HTML文件：包含对其他对象引用的链接</p>
+<p>对象的寻址：URL（统一资源定位符）</p>
+<p>HTTP：采用C/S结构。（无状态协议：服务器不维护任何有关客户端过去所发请求的信息）</p>
+<p>客户——Browser：请求，接受，展示Web对象</p>
+<p>服务器——Web Server：响应客户的请求，发送对象</p>
+<p>注：<img src="https://amazing-compass.github.io//post-images/1617113211586.png" alt="" loading="lazy"></p>
+<p>Http采用TCP连接</p>
+<figure data-type="image" tabindex="1"><img src="https://amazing-compass.github.io//post-images/1617113254736.png" alt="" loading="lazy"></figure>
+<h2 id="2http连接类型">2.Http连接类型</h2>
+<p>非持久性连接（Http1.0）：每个TCP连接最多允许传输一个对象</p>
+<p>持久性连接（Http1.1）：每个TCP连接允许传输多个对象</p>
+<p>注：TCP连接是全双工。</p>
+<p>非持久性连接过程：</p>
+<figure data-type="image" tabindex="2"><img src="https://amazing-compass.github.io//post-images/1617113277647.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://amazing-compass.github.io//post-images/1617113287212.png" alt="" loading="lazy"></figure>
+<p>非持久性来连接问题：</p>
+<p>①每个对象需要2RTT</p>
+<p>②操作系统需要为每个TCP连接开销资源</p>
+<p>③如果打开并行TCP，给服务端造成巨大消耗</p>
+<p>非持久性连接时间：22RTT=11*2RTT（TCP连接+文件传输）</p>
+<p>持久性连接：发出响应后，服务器保持TCP连接的打开，后续的HTTP消息可以通过这个连接发送</p>
+<p>无流水线：总时间12RTT=RTT(TCP连接)+11RTT(11个文件)无流水线：总时间2RTT=RTT(TCP连接)+1RTT(11个文件)</p>
+<figure data-type="image" tabindex="4"><img src="https://amazing-compass.github.io//post-images/1617113297462.png" alt="" loading="lazy"></figure>
+<h2 id="3http消息格式请求消息响应消息">3.Http消息格式(请求消息，响应消息)</h2>
+<p>请求消息：</p>
+<figure data-type="image" tabindex="5"><img src="https://amazing-compass.github.io//post-images/1617113322083.png" alt="" loading="lazy"></figure>
+<p>最下面可能带有给服务器的信息：比方说用户名，密码需要发送给服务器</p>
+<p>上传数据到服务器的方法：</p>
+<p>①POST方法：就如上面所说，将请求消息的消息体（entity body）中上传客户端的输入</p>
+<p>②使用URL方法  get方法  输入信息通过request行的url字段上传</p>
+<p>例：<img src="https://amazing-compass.github.io//post-images/1617113423687.png" alt="" loading="lazy"></p>
+<p>请求方法：<img src="https://amazing-compass.github.io//post-images/1617113535899.png" alt="" loading="lazy"><br>
+——————————————————</p>
+<p>响应方法：<br>
+<img src="https://amazing-compass.github.io//post-images/1617113621825.png" alt="" loading="lazy"></p>
+<p>此时响应状态为：200，OK</p>
+<p>其他状态：<br>
+<img src="https://amazing-compass.github.io//post-images/1617113678017.png" alt="" loading="lazy"></p>
+<h2 id="4cookie技术隐私问题">4.Cookie技术（隐私问题）</h2>
+<p>HTTP协议：无状态，不记录客户的历史行为</p>
+<p>但有时候需要会话状态：如网络购物商品加入购物车，一周之内免密登录</p>
+<p>Cookie组件：      头部行参考前面截图</p>
+<figure data-type="image" tabindex="6"><img src="https://amazing-compass.github.io//post-images/1617113714519.png" alt="" loading="lazy"></figure>
+<h2 id="5web缓存代理服务器技术">5.web缓存/代理服务器技术</h2>
+<p>不访问服务器的前提下满足客户端的HTTP请求</p>
+<p>特点:<br>
+<img src="https://amazing-compass.github.io//post-images/1617113728911.png" alt="" loading="lazy"></p>
+<p>如何保证缓存服务器中是最新内容 ： 条件性get方法<br>
+<img src="https://amazing-compass.github.io//post-images/1617113998754.png" alt="" loading="lazy"></p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://amazing-compass.github.io/post/you-xian-dui-lie/">
+                  <h3 class="post-title">
+                    优先队列
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
